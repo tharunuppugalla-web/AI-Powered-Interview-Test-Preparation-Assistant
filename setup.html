@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Interview | AI Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #a855f7;
+            --success: #10b981;
+            --dark-bg: #0f172a;
+            --glass-bg: rgba(30, 41, 59, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Elements Preserved */
+        .bg-particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: particleFloat 25s infinite linear;
+        }
+
+        .particle:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; }
+        .particle:nth-child(2) { width: 50px; height: 50px; top: 70%; right: 15%; }
+        .particle:nth-child(3) { width: 60px; height: 60px; bottom: 30%; left: 20%; }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.6; }
+            50% { transform: translateY(-25px) rotate(180deg) scale(1.1); opacity: 1; }
+            100% { transform: translateY(0px) rotate(360deg) scale(1); opacity: 0.6; }
+        }
+
+        /* Adjusted Card Container */
+        .setup-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 2.5rem 2rem; /* Adjusted for better content balance */
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.4);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .setup-card:hover { transform: translateY(-5px); }
+
+        .header-section { text-align: center; margin-bottom: 2rem; }
+
+        .domain-badge {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+            color: #c7d2fe;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .setup-title {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .setup-subtitle {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Unified Form Alignment */
+        .form-label-custom {
+            font-weight: 700;
+            color: #f8fafc;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .form-label-custom i { color: var(--primary); width: 18px; text-align: center; }
+
+        .form-select-custom {
+            background: rgba(15, 23, 42, 0.8) !important;
+            border: 2px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 16px !important;
+            color: #fff !important;
+            padding: 14px 20px !important;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        /* Experience Selector Grid */
+        .level-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .level-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .level-icon { font-size: 1.5rem; margin-bottom: 0.5rem; color: #94a3b8; }
+        .level-label { font-weight: 700; font-size: 0.85rem; color: #fff; }
+        .level-desc { font-size: 0.75rem; color: #64748b; }
+
+        .level-input:checked + .level-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .level-input:checked + .level-card .level-icon,
+        .level-input:checked + .level-card .level-label,
+        .level-input:checked + .level-card .level-desc { color: #fff; }
+
+        /* File Upload Adjustments */
+        .file-upload-area {
+            background: rgba(15, 23, 42, 0.5);
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .upload-icon { font-size: 2.5rem; color: #64748b; margin-bottom: 1rem; }
+        .upload-label { font-weight: 600; color: #e2e8f0; font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .upload-hint { color: #64748b; font-size: 0.8rem; }
+
+        /* Launch Button Content Alignment */
+        .launch-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            padding: 18px;
+            border-radius: 18px;
+            font-weight: 800;
+            color: white;
+            width: 100%;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 576px) {
+            .level-selector { grid-template-columns: 1fr; }
+            .setup-card { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="setup-card">
+        <div class="header-section">
+            <div class="domain-badge">
+                <i class="fas fa-briefcase"></i>
+                {{ domain }} Domain
+            </div>
+            <h1 class="setup-title">AI Interview Setup</h1>
+            <p class="setup-subtitle">Configure your personalized mock interview experience</p>
+        </div>
+
+        <form action="/analyze_resume" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="domain" value="{{ domain }}">
+
+            <div class="mb-4">
+                <label class="form-label-custom">
+                    <i class="fas fa-user-tie"></i>
+                    Target Role
+                </label>
+                <select class="form-select form-select-custom" name="job_role" required>
+                    <option value="" disabled selected>Choose position...</option>
+                    {% if domain == 'IT' %}
+                        <option>Software Engineer</option>
+                        <option>Data Scientist</option>
+                        <option>Web Developer</option>
+                        <option>Cybersecurity Analyst</option>
+                    {% else %}
+                        <option>HR Manager</option>
+                        <option>Marketing Head</option>
+                        <option>Sales Executive</option>
+                        <option>Finance Operations</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label-custom">
+                    <i class="fas fa-chart-line"></i>
+                    Experience Level
+                </label>
+                <div class="level-selector">
+                    <div class="level-option">
+                        <input class="level-input" type="radio" name="level" value="Fresher" id="fresher" checked hidden>
+                        <label class="level-card" for="fresher">
+                            <i class="fas fa-seedling level-icon"></i>
+                            <span class="level-label">Fresher</span>
+                            <span class="level-desc">0-1 Year</span>
+                        </label>
+                    </div>
+                    <div class="level-option">
+                        <input class="level-input" type="radio" name="level" value="Intermediate" id="intermediate" hidden>
+                        <label class="level-card" for="intermediate">
+                            <i class="fas fa-chart-area level-icon"></i>
+                            <span class="level-label">Mid-Level</span>
+                            <span class="level-desc">2-5 Years</span>
+                        </label>
+                    </div>
+                    <div class="level-option">
+                        <input class="level-input" type="radio" name="level" value="Senior" id="senior" hidden>
+                        <label class="level-card" for="senior">
+                            <i class="fas fa-crown level-icon"></i>
+                            <span class="level-label">Senior</span>
+                            <span class="level-desc">5+ Years</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label-custom">
+                    <i class="fas fa-file-pdf"></i>
+                    Upload Resume
+                </label>
+                <div class="file-upload-wrapper">
+                    <div class="file-upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <div class="upload-label">Drop PDF here or click</div>
+                        <div class="upload-hint">PDF only • Max 5MB</div>
+                        <input type="file" name="resume" class="file-input-custom" accept=".pdf" required id="resumeInput" hidden>
+                    </div>
+                    <div class="file-name-display" id="fileNameDisplay" style="display:none; margin-top: 10px; text-align: center; color: var(--secondary); font-weight: 600;"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="launch-btn">
+                <i class="fas fa-rocket"></i>
+                Analyze Resume
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('resumeInput');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                fileNameDisplay.textContent = `Selected: ${e.target.files[0].name}`;
+                fileNameDisplay.style.display = 'block';
+            }
+        });
+
+        // Basic Drag & Drop functionality
+        ['dragenter', 'dragover'].forEach(name => {
+            uploadArea.addEventListener(name, (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = 'var(--primary)';
+            }, false);
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileInput.files = e.dataTransfer.files;
+            if (fileInput.files.length) {
+                fileNameDisplay.textContent = `Selected: ${fileInput.files[0].name}`;
+                fileNameDisplay.style.display = 'block';
+            }
+        }, false);
+    </script>
+</body>
+</html>

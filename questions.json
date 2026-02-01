@@ -1,0 +1,46 @@
+{
+  "aptitude": [
+    {
+      "id": 1,
+      "question": "A train 150m long passes a pole in 15 seconds. What is the speed of the train in km/hr?",
+      "options": ["30 km/hr", "36 km/hr", "45 km/hr", "50 km/hr"],
+      "answer": "36 km/hr"
+    },
+    {
+      "id": 2,
+      "question": "What is the next number in the series: 2, 6, 12, 20, 30, ...?",
+      "options": ["40", "42", "44", "46"],
+      "answer": "42"
+    }
+  ],
+  "verbal": [
+    {
+      "id": 1,
+      "question": "Choose the synonym for 'Abundant':",
+      "options": ["Scarce", "Plentiful", "Rare", "Limited"],
+      "answer": "Plentiful"
+    },
+    {
+      "id": 2,
+      "question": "Identify the correctly spelled word:",
+      "options": ["Accomodation", "Accommodation", "Acomodation", "Accommadation"],
+      "answer": "Accommodation"
+    }
+  ],
+  "it_domain": [
+    {
+      "id": 1,
+      "question": "What is the time complexity of searching an element in a balanced Binary Search Tree?",
+      "options": ["O(1)", "O(n)", "O(log n)", "O(n^2)"],
+      "answer": "O(log n)"
+    }
+  ],
+  "non_it_domain": [
+    {
+      "id": 1,
+      "question": "Which of the following is considered a 'soft skill' in management?",
+      "options": ["Financial Auditing", "Data Entry", "Conflict Resolution", "Inventory Coding"],
+      "answer": "Conflict Resolution"
+    }
+  ]
+}
